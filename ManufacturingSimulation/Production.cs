@@ -63,5 +63,10 @@ namespace ManufacturingSimulation
             StartDate = startDate;
             EndDate = endDate;  
         }
+
+        public override string ToString()
+        {
+            return string.Format($"{Id} | {Quantity} | {StartDate:yyyy-mm-dd hh:mm} | {EndDate:yyyy-mm-dd hh:mm}\n");
+        }
     }
 }

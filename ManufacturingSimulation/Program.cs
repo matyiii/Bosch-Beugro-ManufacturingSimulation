@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,14 @@ namespace ManufacturingSimulation
                     $"\nquantity: {production.Quantity}," +
                     $"\nstartDate:{production.StartDate:yyyy-mm-dd hh:mm}," +
                     $"\nendDate:{production.EndDate:yyyy-mm-dd hh:mm}\n");
+            }
+            using(TextWriter tw = new StreamWriter("puffer.txt"))
+            {
+                tw.WriteLine("(pcb_id | quantity | startDate | endDate)");
+                foreach (Production production in productionsList)
+                {
+                    tw.WriteLine(production.ToString());
+                }
             }
             Console.ReadLine();
         }
