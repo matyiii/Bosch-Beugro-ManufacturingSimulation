@@ -28,12 +28,14 @@ namespace ManufacturingSimulation
             }
             using(TextWriter tw = new StreamWriter("puffer.txt"))
             {
-                tw.WriteLine("(pcb_id | quantity | startDate | endDate)");
+                tw.WriteLine("(pcb_id|quantity|startDate|endDate)");
                 foreach (Production production in productionsList)
                 {
                     tw.WriteLine(production.ToString());
                 }
             }
+            Puffer puffer = new Puffer();
+            puffer.ReadFromPuffer();
             Console.ReadLine();
         }
     }
