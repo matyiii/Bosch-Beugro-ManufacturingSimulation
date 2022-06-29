@@ -10,6 +10,9 @@ namespace ManufacturingSimulation
     {
         static void Main(string[] args)
         {
+            DbHelper dbHelper = new DbHelper();
+            dbHelper.GetProducts();
+            Console.ReadLine();
         }
     }
 }
