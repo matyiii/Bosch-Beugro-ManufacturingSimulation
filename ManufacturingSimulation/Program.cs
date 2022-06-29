@@ -10,12 +10,21 @@ namespace ManufacturingSimulation
     {
         static void Main(string[] args)
         {
-            Random random = new Random();
             DbHelper dbHelper = new DbHelper();
             dbHelper.GetProducts();
             IEnumerable<Products> productsList = dbHelper.GetRandomProducts(10);
+            List<Production> productionsList = new List<Production>();
             foreach (Products product in productsList)
-                Console.WriteLine(product.Id);
+            {
+                productionsList.Add(new Production(product.Id, product.Id));
+            }
+            foreach (Production production in productionsList)
+            {
+                Console.WriteLine($"Pcb id:{production.Id}," +
+                    $"\nquantity: {production.Quantity}," +
+                    $"\nstartDate:{production.StartDate:yyyy-mm-dd hh:mm}," +
+                    $"\nendDate:{production.EndDate:yyyy-mm-dd hh:mm}\n");
+            }
             Console.ReadLine();
         }
     }

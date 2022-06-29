@@ -8,16 +8,54 @@ namespace ManufacturingSimulation
 {
     internal class Production
     {
+        static Random random = new Random();
         public int Id { get; set; }
         public int PcbId { get; set; }
 
-        public string Quantity { get; set; }
+        private string quantity;
+        public string Quantity {
+            get
+            { 
+                return quantity;
+            }
+            private set
+            {
+                quantity = random.Next(1, 1001).ToString();
+            }
+        }
 
-        public DateTime StartDate { get; set; }
+        private DateTime startDate;
 
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate {
+            get
+            {
+                return startDate;
+            }
+            private set
+            {
+                startDate = DateTime.Now.Add(new TimeSpan(0, -random.Next(10, 21), 0));
+            }
+        }
 
-        public Production(int id, int pcbId, string quantity, DateTime startDate, DateTime endDate)
+        private DateTime endDate;
+
+        public DateTime EndDate
+        {
+            get
+            {
+                return endDate;
+            }
+            private set
+            {
+                value = DateTime.Now.Add(new TimeSpan(0, -random.Next(1, 16), 0));
+                while (startDate>value)
+                    value = DateTime.Now.Add(new TimeSpan(0, -random.Next(1, 16), 0));
+                endDate = value;
+            }
+                
+        }
+
+        public Production(int id, int pcbId)
         {
             Id = id;
             PcbId = pcbId;
