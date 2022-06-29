@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace ManufacturingSimulation
 {
     internal class Puffer
     {
+        List<Production> productionList = new List<Production>();
         public void ReadFromPuffer()
         {
             StreamReader file = new StreamReader("puffer.txt");
-            List<Production> productionList = new List<Production>();
             int lineCounter = 0;
             int lineToDelete = 4;
             file.ReadLine();
@@ -37,6 +38,20 @@ namespace ManufacturingSimulation
             {
                 productionList.RemoveAll(x => x.PcbId == 4);
                 Console.WriteLine($"Pcb_Id:4 was found, and deleted.");
+            }
+        }
+
+        public void UploadToProductionTable()
+        {
+            using (var connection = new MySqlConnection("Server=localhost;Database=cs_beugro;Uid=root;Pwd=;"))
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                foreach (Production production in productionList)
+                {
+                    command.CommandText = $"INSERT INTO production (pcb_id,quantity,startDate,endDate) VALUES ({production.PcbId},{production.Quantity},'{production.StartDate}','{production.EndDate}')";
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }

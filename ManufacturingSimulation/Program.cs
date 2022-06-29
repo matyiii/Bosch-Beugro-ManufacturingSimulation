@@ -36,6 +36,7 @@ namespace ManufacturingSimulation
             }
             Puffer puffer = new Puffer();
             puffer.ReadFromPuffer();
+            puffer.UploadToProductionTable();
             Console.ReadLine();
         }
     }
