@@ -10,8 +10,12 @@ namespace ManufacturingSimulation
     {
         static void Main(string[] args)
         {
+            Random random = new Random();
             DbHelper dbHelper = new DbHelper();
             dbHelper.GetProducts();
+            IEnumerable<Products> productsList = dbHelper.GetRandomProducts(10);
+            foreach (Products product in productsList)
+                Console.WriteLine(product.Id);
             Console.ReadLine();
         }
     }

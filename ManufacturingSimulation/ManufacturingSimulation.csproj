@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="DbHelper.cs" />
     <Compile Include="Production.cs" />
+    <Compile Include="Products.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
