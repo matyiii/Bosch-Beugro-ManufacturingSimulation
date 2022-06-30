@@ -49,8 +49,12 @@ namespace ManufacturingSimulation
                 connection.Open();
                 foreach (Production production in productionList)
                 {
-                    command.CommandText = $"INSERT INTO production (pcb_id,quantity,startDate,endDate) VALUES ({production.PcbId},{production.Quantity},'{production.StartDate}','{production.EndDate}')";
+                    command.Parameters.AddWithValue("@startDate", production.StartDate);
+                    command.Parameters.AddWithValue("@endDate", production.EndDate);
+                    command.CommandText = $"INSERT INTO production (pcb_id,quantity,startDate,endDate)" +
+                        $"VALUES ({production.PcbId},{production.Quantity},@startDate,@endDate)";
                     command.ExecuteNonQuery();
+                    command.Parameters.Clear();
                 }
             }
         }

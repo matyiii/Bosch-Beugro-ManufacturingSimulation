@@ -8,7 +8,7 @@ namespace ManufacturingSimulation
 {
     internal class Production
     {
-        static Random random = new Random();
+        static readonly Random random = new Random();
         public int Id { get; set; }
         public int PcbId { get; set; }
 
@@ -33,8 +33,11 @@ namespace ManufacturingSimulation
             }
             private set
             {
-                startDate = DateTime.Now.Add(new TimeSpan(0, -random.Next(10, 21), 0));
+                DateTime time1= DateTime.Now;
+                DateTime time2 = time1.Subtract(new TimeSpan(0, random.Next(10, 21), 0));
+                startDate = time2;
             }
+            
         }
 
         private DateTime endDate;
@@ -66,7 +69,7 @@ namespace ManufacturingSimulation
 
         public override string ToString()
         {
-            return string.Format($"{Id}|{Quantity}|{StartDate:yyyy-mm-dd hh:mm}|{EndDate:yyyy-mm-dd hh:mm}");
+            return string.Format($"{Id}|{quantity}|{startDate:yyyy-mm-dd hh:mm}|{endDate:yyyy-mm-dd hh:mm}");
         }
     }
 }

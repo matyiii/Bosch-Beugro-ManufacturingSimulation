@@ -21,10 +21,10 @@ namespace ManufacturingSimulation
             }
             foreach (Production production in productionsList)
             {
-                Console.WriteLine($"Pcb id:{production.Id}," +
+                Console.WriteLine($"Pcb id: {production.Id}," +
                     $"\nquantity: {production.Quantity}," +
-                    $"\nstartDate:{production.StartDate:yyyy-mm-dd hh:mm}," +
-                    $"\nendDate:{production.EndDate:yyyy-mm-dd hh:mm}\n");
+                    $"\nstartDate: {production.StartDate}," +
+                    $"\nendDate: {production.EndDate}\n");
             }
             using(TextWriter tw = new StreamWriter("puffer.txt"))
             {
